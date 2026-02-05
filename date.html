@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Date 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function(){
+    emailjs.init("S3JW8gOdKa612ZpD4");
+})();
+</script>
+
+<body>
+
+<div class="card">
+    <div class="heart">🗺️💘</div>
+
+    <h1>So… san tayo punta??</h1>
+
+    <p>
+        pili ka dyan kung ano mas gusto mo 💕<br>
+        kahit san naman piliin mo basta kasama ka masaya ako 🥰
+    </p>
+
+    <div class="choices">
+        <button class="choice">🎬 Movie Date</button>
+        <button class="choice">🍽️ Dinner Date</button>
+        <button class="choice">☕ Coffee & Tagaytay Night Trip 🌌</button>
+    </div>
+
+<p id="result" class="love-note"></p>
+
+<button id="confirmBtn" style="display:none;">Confirm 💖</button>
+
+<p id="finalMessage" class="love-note"></p>
+
+<footer>yiiie happy kana? hahahaha💖</footer
+</div>
+
+<script>
+const choices = document.querySelectorAll(".choice");
+const result = document.getElementById("result");
+const confirmBtn = document.getElementById("confirmBtn");
+const finalMessage = document.getElementById("finalMessage");
+
+let selectedDate = "";
+
+const textMap = {
+    "🎬 Movie Date": "🎥 Sa Sm Lipa tayo  🍿",
+    "🍽️ Dinner Date": "🍽️ may budget naman tayo kaya kung ano cravings mo don tayo 🥰",
+    "☕ Coffee & Tagaytay Night Trip 🌌": 
+        " hmmmmm sarap nito malamig tas gabi perpect date!!💖"
+};
+
+choices.forEach(choice => {
+    choice.addEventListener("click", () => {
+        choices.forEach(c => c.classList.remove("selected"));
+        choice.classList.add("selected");
+
+        selectedDate = choice.textContent;
+        result.textContent = textMap[selectedDate];
+
+        confirmBtn.style.display = "inline-block";
+        finalMessage.textContent = "";
+    });
+});
+
+confirmBtn.addEventListener("click", () => {
+    confirmBtn.style.display = "none";
+
+    emailjs.send(
+        "service_xjsmyag",
+        "template_w8yrprr",
+        {
+            date_choice: selectedDate,
+            message: "She confirmed the date choice 💖"
+        }
+    );
+
+    finalMessage.innerHTML = `
+        💖 It’s official! 💖<br>
+        <strong>${selectedDate}</strong><br><br>
+        I already can’t wait 🥰
+    `;
+});
+</script>
+
+
+
+
+
+</body>
+</html>
