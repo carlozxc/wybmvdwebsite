@@ -1,12 +1,27 @@
 /* NO button dodge effect */
 const noBtn = document.getElementById("noBtn");
 
-if (noBtn) {
-    noBtn.addEventListener("mouseover", () => {
-        const x = Math.random() * 200 - 100;
-        const y = Math.random() * 200 - 100;
+function moveNoButton() {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
 
-        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+if (noBtn) {
+    // Desktop hover
+    noBtn.addEventListener("mouseover", moveNoButton);
+
+    // Mobile touch
+    noBtn.addEventListener("touchstart", (e) => {
+        e.preventDefault(); // stops the click
+        moveNoButton();
+    });
+
+    // Extra safety: block click entirely
+    noBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        moveNoButton();
     });
 }
 
