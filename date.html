@@ -15,6 +15,7 @@
 </script>
 
 <body>
+<div id="roseContainer"></div>
 
 <div class="card">
     <div class="heart">🗺️💘</div>
@@ -38,7 +39,8 @@
 
 <p id="finalMessage" class="love-note"></p>
 
-<footer>yiiie happy kana? hahahaha💖</footer
+<footer>yiiie happy kana? hahahaha💖</footer>
+
 </div>
 
 <script>
@@ -82,11 +84,41 @@ confirmBtn.addEventListener("click", () => {
     );
 
     finalMessage.innerHTML = `
-        💖 It’s official! 💖<br>
-        <strong>${selectedDate}</strong><br><br>
-        I already can’t wait 🥰
+        💖 Yeheey!! 💖<br>
+        tuloy na tayo nyan 🥰
     `;
+
+    const roseContainer = document.getElementById("roseContainer");
+
+    function createRose() {
+        if (!roseContainer) return;
+
+        const rose = document.createElement("div");
+        rose.classList.add("rose");
+        rose.innerHTML = "🌹";
+
+        // random horizontal start
+        rose.style.left = Math.random() * 100 + "vw";
+        // start from bottom
+        rose.style.bottom = "-50px";
+        // random size
+        rose.style.fontSize = Math.random() * 25 + 20 + "px";
+        // random animation duration
+        rose.style.animationDuration = Math.random() * 2 + 4 + "s";
+
+        roseContainer.appendChild(rose);
+
+        setTimeout(() => {
+            rose.remove();
+        }, 5000);
+    }
+
+    // Spawn 20 roses staggered
+    for (let i = 0; i < 20; i++) {
+        setTimeout(createRose, i * 150);
+    }
 });
+
 </script>
 
 
